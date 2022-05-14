@@ -1,8 +1,9 @@
 import React from 'react';
+import { getBottomSpace } from 'react-native-iphone-x-helper';
 import { HightLightCard } from '../../components/HightLightCard';
 import { TransactionCard } from '../../components/TransactionCard';
-import { 
-  Container, 
+import {
+  Container,
   Header,
   UserInfo,
   Photo,
@@ -13,18 +14,46 @@ import {
   Icon,
   HightLightCards,
   Transections,
-  Title
+  Title,
+  TransectionList
 } from './styles'
 
 export function Dashboard() {
-  return(
+  const data = [{
+    title: 'Desenvolvimento de site',
+    amount: 'R$ 12.000,00',
+    category: {
+      name: 'Vendas',
+      icon: 'dollar-sign',
+    },
+    date: '13/04/2020'
+  },
+  {
+    title: 'Desenvolvimento de site',
+    amount: 'R$ 12.000,00',
+    category: {
+      name: 'Vendas',
+      icon: 'dollar-sign',
+    },
+    date: '13/04/2020'
+  },
+  {
+    title: 'Desenvolvimento de site',
+    amount: 'R$ 12.000,00',
+    category: {
+      name: 'Vendas',
+      icon: 'dollar-sign',
+    },
+    date: '13/04/2020'
+  }]
+  return (
     <Container>
       <Header>
 
         <UserWrapper>
           <UserInfo>
-            <Photo 
-              source={{uri: 'https://avatars.githubusercontent.com/u/76965306?v=4'}}
+            <Photo
+              source={{ uri: 'https://avatars.githubusercontent.com/u/76965306?v=4' }}
             />
 
             <User>
@@ -32,22 +61,22 @@ export function Dashboard() {
               <UserName>Weber</UserName>
             </User>
           </UserInfo>
-        <Icon name="power"/>
+          <Icon name="power" />
         </UserWrapper>
       </Header>
-      
-      <HightLightCards 
+
+      <HightLightCards
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ paddingLeft: 24 }}
       >
-        <HightLightCard 
+        <HightLightCard
           type='up'
           title="Entradas"
           amount="R$ 17.400,00"
           lastTransaction="Última entrada dia 13 de abril"
         />
-        <HightLightCard 
+        <HightLightCard
           type='down'
           title="Saídas"
           amount="R$ 1.259,00"
@@ -63,8 +92,16 @@ export function Dashboard() {
 
       <Transections>
         <Title>Listagem</Title>
-        <TransactionCard/>
+        <TransectionList
+          data={data}
+          renderItem={({ item }) =>  <TransactionCard data={item}/>}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{
+            paddingBottom: getBottomSpace()
+          }}
+        />
       </Transections>
+
     </Container>
   )
 }
